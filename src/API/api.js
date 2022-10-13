@@ -8,6 +8,11 @@ async function GetRecipes() {
     return response.data;
 }
 
+async function GetFavoritesRecipes() {
+    let response = await axios.get(apiUrl + 'getRecipes');
+    return response.data;
+}
+
 
 async function Auth(username, password) {
     return await axios.post(apiUrl + 'auth', { username: username, password: password }).then((response) => {
@@ -53,5 +58,6 @@ export const api = {
     Logout: Logout,
     AddToFavorites: AddToFavorites,
     DeleteRecipe: DeleteRecipe,
-    PostRecipe: PostRecipe
+    PostRecipe: PostRecipe,
+    GetFavoritesRecipes: GetFavoritesRecipes
 }

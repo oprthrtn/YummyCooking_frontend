@@ -1,10 +1,10 @@
 import './App.css';
-import { api } from './API/api';
 import { useEffect } from 'react';
 import MainPage from './pages/MainPage';
 import CreateRicpePage from './pages/CreateRecipePage';
 import Container from 'react-bootstrap/Container';
 import RecipePage from './pages/RecipePage';
+import AuthPage from './pages/authPage';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import {
@@ -13,6 +13,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import FavoritesPage from './pages/FavoritesPage';
 
 function App() {
 
@@ -41,11 +42,13 @@ function App() {
         <Routes>
           <Route path="/home" element={<MainPage />}>
           </Route>
-          <Route path="/favorites" element={<MainPage />}>
+          <Route path="/favorites" element={<FavoritesPage />}>
           </Route>
           <Route path="/createRecipe" element={<CreateRicpePage />}>
           </Route>
-          <Route path="/recipePage" element={<RecipePage />}>
+          <Route path="/recipe/:id" element={<RecipePage />}>
+          </Route>
+          <Route path="/auth" element={<AuthPage />}>
           </Route>
         </Routes>
       </BrowserRouter>
