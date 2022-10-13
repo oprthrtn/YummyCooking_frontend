@@ -1,18 +1,17 @@
 import Card from 'react-bootstrap/Card';
-import { useNavigate  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function RecipeCard(props) {
     const navigate = useNavigate();
+    const recipe = props.recipe;
 
-    console.log(props)
     return (
-        <Card style={{ width: '18rem' }} onClick={() => {navigate(`/recipePage/${props.recipeId}`)}}>
-            <Card.Img variant="top" src="holder.js/100px180" />
+        <Card style={{ width: '18rem' }} onClick={() => { navigate(`/recipePage/${recipe.ID}`) }}>
+            <Card.Img variant="top" src={recipe.ImageURL} />
             <Card.Body>
-                <Card.Title>Card Title</Card.Title>
+                <Card.Title>{recipe.Title}</Card.Title>
                 <Card.Text>
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
+                    {recipe.Description}
                 </Card.Text>
             </Card.Body>
         </Card>

@@ -17,12 +17,6 @@ import {
 function App() {
 
   useEffect(() => {
-    async function getRecipes() {
-      const recipes = await api.GetRecipes();
-      console.log(recipes);
-    }
-
-    getRecipes();
   }, [])
 
   return (
