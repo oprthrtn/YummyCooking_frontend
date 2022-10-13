@@ -6,7 +6,7 @@ function RecipeCard(props) {
     const recipe = props.recipe;
 
     return (
-        <Card style={{ width: '18rem' }} onClick={() => { navigate(`/recipePage/${recipe.ID}`) }}>
+        <Card style={{ width: '18rem' }} onClick={() => { navigate(`/recipe/${recipe.ID}`) }}>
             <Card.Img variant="top" src={recipe.ImageURL} />
             <Card.Body>
                 <Card.Title>{recipe.Title}</Card.Title>

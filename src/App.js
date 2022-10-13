@@ -1,10 +1,10 @@
 import './App.css';
-import { api } from './API/api';
 import { useEffect } from 'react';
 import MainPage from './pages/MainPage';
 import CreateRicpePage from './pages/CreateRecipePage';
 import Container from 'react-bootstrap/Container';
 import RecipePage from './pages/RecipePage';
+import AuthPage from './pages/authPage';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import {
@@ -13,6 +13,9 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import FavoritesPage from './pages/FavoritesPage';
+import Button from 'react-bootstrap/Button';
+import { api } from './API/api';
 
 function App() {
 
@@ -31,7 +34,7 @@ function App() {
                 <Nav.Link as={Link} to="home">Главная</Nav.Link>
                 <Nav.Link as={Link} to="favorites">Избранное</Nav.Link>
                 <Nav.Link as={Link} to="createRecipe">Создать рецепт</Nav.Link>
-                <Nav.Link as={Link} to="auth" className='ms-auto'>Войти</Nav.Link>
+                <IsAuth />
               </Nav>
             </Navbar.Collapse>
           </Container>
@@ -41,11 +44,13 @@ function App() {
         <Routes>
           <Route path="/home" element={<MainPage />}>
           </Route>
-          <Route path="/favorites" element={<MainPage />}>
+          <Route path="/favorites" element={<FavoritesPage />}>
           </Route>
           <Route path="/createRecipe" element={<CreateRicpePage />}>
           </Route>
-          <Route path="/recipePage" element={<RecipePage />}>
+          <Route path="/recipe/:id" element={<RecipePage />}>
+          </Route>
+          <Route path="/auth" element={<AuthPage />}>
           </Route>
         </Routes>
       </BrowserRouter>
@@ -53,4 +58,24 @@ function App() {
   );
 }
 
+function IsAuth() {
+
+  function handleButton(e) {
+    localStorage.clear();
+    api.Logout();
+  }
+
+  console.log(localStorage.getItem('token'))
+  if (localStorage.getItem('token')) {
+    return (
+      <Button className='submit ms-auto' onClick={handleButton}>Выйти</Button>
+    )
+  }
+  else {
+
+    return (
+      <Nav.Link as={Link} to="auth" className='ms-auto'>Войти</Nav.Link>
+    )
+  }
+}
 export default App;
