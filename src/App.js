@@ -1,4 +1,6 @@
 import './App.css';
+import { api } from './API/api';
+import { useEffect } from 'react';
 import MainPage from './pages/MainPage';
 import CreateRicpePage from './pages/CreateRecipePage';
 import Container from 'react-bootstrap/Container';
@@ -13,6 +15,16 @@ import {
 } from "react-router-dom";
 
 function App() {
+
+  useEffect(() => {
+    async function getRecipes() {
+      const recipes = await api.GetRecipes();
+      console.log(recipes);
+    }
+
+    getRecipes();
+  }, [])
+
   return (
     <div className="App">
       <BrowserRouter>
