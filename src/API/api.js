@@ -1,6 +1,9 @@
 import axios from "axios";
 
 const apiUrl = 'http://yummycookingbackend/';
+const config = {
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+};
 
 async function GetRecipes() {
 
@@ -11,7 +14,7 @@ async function GetRecipes() {
 async function GetFavoritesRecipes() {
     let response = await axios.get(apiUrl + 'getRecipes');
     return response.data;
-}
+} 
 
 
 async function Auth(username, password) {
@@ -46,7 +49,8 @@ async function DeleteRecipe(recipeId) {
 
 
 async function PostRecipe(body) {
-    return await axios.post(apiUrl + 'postRecipe', { body }).then((response) => {
+    return await axios.post(apiUrl + 'postRecipe', body, config).then((response) => {
+        console.log(response)
         return response;
     });
 }
