@@ -14,6 +14,8 @@ import {
   Link
 } from "react-router-dom";
 import FavoritesPage from './pages/FavoritesPage';
+import Button from 'react-bootstrap/Button';
+import { api } from './API/api';
 
 function App() {
 
@@ -32,7 +34,7 @@ function App() {
                 <Nav.Link as={Link} to="home">Главная</Nav.Link>
                 <Nav.Link as={Link} to="favorites">Избранное</Nav.Link>
                 <Nav.Link as={Link} to="createRecipe">Создать рецепт</Nav.Link>
-                <Nav.Link as={Link} to="auth" className='ms-auto'>Войти</Nav.Link>
+                <IsAuth />
               </Nav>
             </Navbar.Collapse>
           </Container>
@@ -56,4 +58,24 @@ function App() {
   );
 }
 
+function IsAuth() {
+
+  function handleButton(e) {
+    localStorage.clear();
+    api.Logout();
+  }
+
+  console.log(localStorage.getItem('token'))
+  if (localStorage.getItem('token')) {
+    return (
+      <Button className='submit ms-auto' onClick={handleButton}>Выйти</Button>
+    )
+  }
+  else {
+
+    return (
+      <Nav.Link as={Link} to="auth" className='ms-auto'>Войти</Nav.Link>
+    )
+  }
+}
 export default App;

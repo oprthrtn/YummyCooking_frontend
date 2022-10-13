@@ -14,23 +14,29 @@ async function GetRecipes() {
 async function GetFavoritesRecipes() {
     let response = await axios.get(apiUrl + 'getRecipes');
     return response.data;
-} 
+}
 
 
 async function Auth(username, password) {
-    return await axios.post(apiUrl + 'auth', { username: username, password: password }).then((response) => {
+    return await axios.post(apiUrl + 'auth', { nickname: username, password: password }).then((response) => {
+        if (response.data.message) {
+            localStorage.setItem('token', response.data.message)
+        }
         return response;
     });
 }
 
 async function Register(username, password) {
     return await axios.post(apiUrl + 'register', { username: username, password: password }).then((response) => {
+        if (response.data.message) {
+            localStorage.setItem('token', response.data.message)
+        }
         return response;
     });
 }
 
 async function Logout() {
-    return await axios.post(apiUrl + 'logout').then((response) => {
+    return await axios.post(apiUrl + 'logout', {}, config).then((response) => {
         return response;
     });
 }
